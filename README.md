@@ -15,3 +15,8 @@ localhost:8080/auth/authenticate
     "username": "anonym",
     "password": "123456"
 }
+
+
+After registration we get a JWT Token response and have to put it in header.
+
+Authorization | Bearer <token>
