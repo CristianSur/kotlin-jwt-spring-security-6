@@ -1,5 +1,4 @@
-# kotlin-jwt-spring-security-6
-<h1>Sample of spring security using JWT </h1>
+#Sample of spring security using JWT | kotlin-jwt-spring-security-6
 <h2>POST</h2>
     
     localhost:9090/api/auth/register
