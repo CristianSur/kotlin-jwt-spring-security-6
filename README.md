@@ -1,7 +1,7 @@
 # kotlin-jwt-spring-security-6
-Sample of spring security using JWT 
+<h1>Sample of spring security using JWT </h1>
 
-POST
+    <h2>POST</h2>
 localhost:9090/api/auth/register
 {
     "email": "some.user@gmail.com",
