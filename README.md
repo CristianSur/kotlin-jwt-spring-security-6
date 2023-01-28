@@ -11,10 +11,16 @@
     
 <h2>POST</h2>
 
-    localhost:8080/auth/authenticate
+    localhost:9090/auth/authenticate
     {
         "username": "anonym",
         "password": "123456"
+    }
+    
+<h3>RESPONSE</h3>
+
+    {
+        "token": "eyJhbG..."
     }
 
 
