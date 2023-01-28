@@ -1,4 +1,5 @@
 # Sample of spring security using JWT | kotlin-jwt-spring-security-6
+DB: PostgreSQL
 
 <h2>POST</h2>
     
