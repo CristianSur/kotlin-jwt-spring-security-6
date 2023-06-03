@@ -1,6 +1,7 @@
 package com.example.sample.service
 
 import com.example.sample.entity.UserEntity
+import com.example.sample.exception.RegisteredException
 import com.example.sample.model.authentication.AuthenticationRequest
 import com.example.sample.model.authentication.AuthenticationResponse
 import com.example.sample.model.authentication.RegisterRequest
@@ -22,7 +23,7 @@ class UserService(
     fun register(registerRequest: RegisterRequest): AuthenticationResponse {
 
         if (userRepository.findByUsernameOrEmail(registerRequest.username, registerRequest.email) != null) {
-            throw Exception("Email or Username are already registered")
+            throw RegisteredException("Email or Username are already registered")
         }
 
         val user = UserEntity(
@@ -49,6 +50,6 @@ class UserService(
 
         val user = userRepository.findByUsername(authenticationRequest.username)
 
-        return AuthenticationResponse(jwtService.generateToken(user))
+        return AuthenticationResponse(jwtService.generateToken(user!!))
     }
 }

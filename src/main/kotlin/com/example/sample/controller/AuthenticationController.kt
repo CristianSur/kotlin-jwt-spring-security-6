@@ -1,9 +1,9 @@
 package com.example.sample.controller
 
+import com.example.sample.exception.RegisteredException
 import com.example.sample.model.authentication.AuthenticationRequest
 import com.example.sample.model.authentication.RegisterRequest
 import com.example.sample.service.UserService
-import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -18,12 +18,17 @@ class AuthenticationController(
 ) {
 
     @PostMapping("/register")
-    fun register(@RequestBody registerRequest: RegisterRequest) =
+    fun register(@RequestBody registerRequest: RegisterRequest) = try {
         ResponseEntity.ok(userService.register(registerRequest))
+    } catch (e: RegisteredException) {
+        ResponseEntity.badRequest().body(e.message)
+    }
 
 
     @PostMapping("/authenticate")
-    fun authenticate(@RequestBody authenticationRequest: AuthenticationRequest) =
+    fun authenticate(@RequestBody authenticationRequest: AuthenticationRequest) = try {
         ResponseEntity.ok(userService.authenticate(authenticationRequest))
-
+    } catch (e: Exception) {
+        ResponseEntity.badRequest().body("Invalid credentials.")
+    }
 }
