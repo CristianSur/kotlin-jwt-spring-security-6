@@ -9,7 +9,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 
 
 @Configuration
@@ -17,26 +16,22 @@ class ApplicationSecurityConfig(
     private val userRepository: UserRepository
 ) {
     @Bean
-    fun passwordEncoder(): PasswordEncoder? {
-        return BCryptPasswordEncoder()
-    }
+    fun passwordEncoder() = BCryptPasswordEncoder()
+
 
     @Bean
-    fun userDetailsService(): UserDetailsService? {
-        return UserDetailsService { userRepository.findByUsername(it) }
-    }
+    fun userDetailsService() = UserDetailsService { userRepository.findByUsername(it) }
+
 
     @Bean
-    fun authenticationManager(configuration: AuthenticationConfiguration): AuthenticationManager? {
-        return configuration.authenticationManager
-    }
+    fun authenticationManager(configuration: AuthenticationConfiguration): AuthenticationManager =
+        configuration.authenticationManager
+
 
     @Bean
-    fun authenticationProvider(): AuthenticationProvider? {
-        val provider = DaoAuthenticationProvider()
-        provider.setUserDetailsService(userDetailsService())
-        provider.setPasswordEncoder(passwordEncoder())
-        return provider
+    fun authenticationProvider() = DaoAuthenticationProvider().apply {
+        setUserDetailsService(userDetailsService())
+        setPasswordEncoder(passwordEncoder())
     }
 
 }

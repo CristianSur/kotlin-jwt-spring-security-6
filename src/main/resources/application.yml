@@ -25,5 +25,7 @@ spring:
 
 custom:
   jwt:
+#hardcoded 256-bit hex formatted secret key
+#generated on https://allkeysgenerator.com/random/security-encryption-key-generator.aspx
     secret: 77397A24432646294A404E635266556A586E3272357538782F4125442A472D4B
     expiration: 720000

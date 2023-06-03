@@ -3,6 +3,7 @@ package com.example.sample.controller
 import com.example.sample.model.authentication.AuthenticationRequest
 import com.example.sample.model.authentication.RegisterRequest
 import com.example.sample.service.UserService
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
