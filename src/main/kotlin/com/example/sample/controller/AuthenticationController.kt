@@ -4,6 +4,8 @@ import com.example.sample.exception.RegisteredException
 import com.example.sample.model.authentication.AuthenticationRequest
 import com.example.sample.model.authentication.RegisterRequest
 import com.example.sample.service.UserService
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -18,17 +20,10 @@ class AuthenticationController(
 ) {
 
     @PostMapping("/register")
-    fun register(@RequestBody registerRequest: RegisterRequest) = try {
-        ResponseEntity.ok(userService.register(registerRequest))
-    } catch (e: RegisteredException) {
-        ResponseEntity.badRequest().body(e.message)
-    }
-
+    fun register(@RequestBody registerRequest: RegisterRequest) =
+        ResponseEntity(userService.register(registerRequest), HttpStatus.CREATED)
 
     @PostMapping("/authenticate")
-    fun authenticate(@RequestBody authenticationRequest: AuthenticationRequest) = try {
+    fun authenticate(@RequestBody authenticationRequest: AuthenticationRequest) =
         ResponseEntity.ok(userService.authenticate(authenticationRequest))
-    } catch (e: Exception) {
-        ResponseEntity.badRequest().body("Invalid credentials.")
-    }
 }

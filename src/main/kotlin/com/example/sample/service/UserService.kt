@@ -23,7 +23,7 @@ class UserService(
     fun register(registerRequest: RegisterRequest): AuthenticationResponse {
 
         if (userRepository.findByUsernameOrEmail(registerRequest.username, registerRequest.email) != null) {
-            throw RegisteredException("Email or Username are already registered")
+            throw RegisteredException()
         }
 
         val user = UserEntity(
@@ -41,7 +41,7 @@ class UserService(
 
     fun authenticate(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
 
-        this.authenticationManager.authenticate(
+        authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
                 authenticationRequest.username,
                 authenticationRequest.password
