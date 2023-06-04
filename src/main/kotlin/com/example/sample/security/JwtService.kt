@@ -29,19 +29,19 @@ class JwtService {
     }
 
     fun generateToken(extraClaims: Map<String, Any>, userDetails: UserDetails): String = Jwts.builder()
-            .setClaims(extraClaims)
-            .setSubject(userDetails.username)
-            .setIssuedAt(Date(System.currentTimeMillis()))
-            .setExpiration(Date(System.currentTimeMillis() + expirationTime.toLong()))
-            .signWith(getSignInKey(), SignatureAlgorithm.HS256)
-            .compact()
+        .setClaims(extraClaims)
+        .setSubject(userDetails.username)
+        .setIssuedAt(Date(System.currentTimeMillis()))
+        .setExpiration(Date(System.currentTimeMillis() + expirationTime.toLong()))
+        .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+        .compact()
 
     private fun extractAllClaims(token: String): Claims = Jwts
-            .parserBuilder()
-            .setSigningKey(getSignInKey())
-            .build()
-            .parseClaimsJws(token) //json web signature
-            .body
+        .parserBuilder()
+        .setSigningKey(getSignInKey())
+        .build()
+        .parseClaimsJws(token) //json web signature
+        .body
 
     fun generateToken(userDetails: UserDetails): String = generateToken(HashMap(), userDetails)
 

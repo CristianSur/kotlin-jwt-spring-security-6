@@ -22,9 +22,10 @@ class SecurityConfig(
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain? = http
         .csrf { it.disable() }
-        .authorizeHttpRequests { it
-            .requestMatchers("/auth/**").permitAll()
-            .anyRequest().authenticated()
+        .authorizeHttpRequests {
+            it
+                .requestMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated()
         }
         .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         .authenticationProvider(authenticationProvider)
